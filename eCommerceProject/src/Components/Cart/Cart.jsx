@@ -151,7 +151,7 @@ function Cart() {
                     ))
                 }
                 <span className='text-xl font-semibold text-[#d6336c]'>Total M.R.P</span>
-                <span className='text-black dark:text-white text-xl ml-[19em] font-bold'>₹ {totalPrice().toFixed(2)} </span>
+                <span className='text-black dark:text-white text-xl ml-[19em] font-bold'>$ {totalPrice().toFixed(2)} </span>
 
                 <button className=' bg-[#d6336c] text-white rounded-lg px-[14em] py-[1em] mt-12 font-bold'>Place Your Order</button>
             </div>
