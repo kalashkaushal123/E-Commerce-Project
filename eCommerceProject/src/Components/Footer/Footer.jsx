@@ -2,24 +2,24 @@ import React from 'react'
 
 function Footer() {
   return (
-    <footer className="bg-[#fce8ea] dark:bg-[#121212] border-t border-pink-100 dark:border-[#2a2a2a] bottom-0 left-0 w-full">
-      <div className="max-w-7xl mx-auto px-6 py-10">
+    <footer className="bg-[#fce8ea] dark:bg-[#121212] border-t border-pink-100 dark:border-[#2a2a2a] w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
 
         {/* Top Section */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm">
 
           {/* Brand */}
-          <div>
+          <div className="text-center sm:text-left">
             <h2 className="text-2xl font-bold text-[#d6336c]">
               Glow<span className="text-[#333] dark:text-[#f1f1f1]">Beauty</span>
             </h2>
-            <p className="mt-3 text-[#555] dark:text-[#b5b5b5]">
+            <p className="mt-3 text-[#555] dark:text-[#b5b5b5] max-w-xs mx-auto sm:mx-0">
               Premium beauty & skincare products made to enhance your natural glow.
             </p>
           </div>
 
-          {/* Links */}
-          <div>
+          {/* Shop */}
+          <div className="text-center sm:text-left">
             <h3 className="font-semibold text-[#333] dark:text-[#f1f1f1] mb-3">
               Shop
             </h3>
@@ -32,7 +32,7 @@ function Footer() {
           </div>
 
           {/* Company */}
-          <div>
+          <div className="text-center sm:text-left">
             <h3 className="font-semibold text-[#333] dark:text-[#f1f1f1] mb-3">
               Company
             </h3>
@@ -45,7 +45,7 @@ function Footer() {
           </div>
 
           {/* Support */}
-          <div>
+          <div className="text-center sm:text-left">
             <h3 className="font-semibold text-[#333] dark:text-[#f1f1f1] mb-3">
               Support
             </h3>
@@ -59,17 +59,19 @@ function Footer() {
 
         </div>
 
-        {/* Bottom */}
-        <div className="mt-10 border-t border-pink-100 dark:border-[#2a2a2a] pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-[#555] dark:text-[#b5b5b5]">
+        {/* Bottom Section */}
+        <div className="mt-10 border-t border-pink-100 dark:border-[#2a2a2a] pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-[#555] dark:text-[#b5b5b5] text-center sm:text-left">
           <p>© 2025 GlowBeauty. All rights reserved.</p>
-          <p className="mt-2 md:mt-0">
+          <p className="mt-2 sm:mt-0">
             Made with 💖 for beauty lovers
           </p>
         </div>
 
       </div>
     </footer>
-  )
+    
+)
 }
 
 export default Footer
+

@@ -10,10 +10,10 @@ const images = [
 function Slider() {
   const [current, setCurrent] = useState(0);
 
-    useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 5000); 
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -27,44 +27,54 @@ function Slider() {
   };
 
   return (
-    <div className="dark:bg-black pt-[5em]">
-    <div className="relative w-[80em] h-[25em] mx-auto overflow-hidden">
+    <div className="dark:bg-black pt-20 px-4">
+      <div className="
+        relative 
+        max-w-7xl 
+        mx-auto 
+        overflow-hidden 
+        rounded-2xl
+        h-[200px]
+        sm:h-[280px]
+        md:h-[350px]
+        lg:h-[400px]
+      ">
 
-      {/* Image */}
-      <img
-        src={images[current]}
-        alt="slider"
-        className="w-full h-full object-cover transition-all duration-700"
-      />
+        {/* Image */}
+        <img
+          src={images[current]}
+          alt="slider"
+          className="w-full h-full object-cover transition-all duration-700"
+        />
 
-      {/* Prev */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/40 p-3 rounded-full w-12"
-      >
-        ❮
-      </button>
+        {/* Prev */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 bg-white/40 p-2 sm:p-3 rounded-full w-10 sm:w-12"
+        >
+          ❮
+        </button>
 
-      {/* Next */}
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/40 p-3 rounded-full w-12"
-      >
-        ❯
-      </button>
+        {/* Next */}
+        <button
+          onClick={nextSlide}
+          className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 bg-white/40 p-2 sm:p-3 rounded-full w-10 sm:w-12"
+        >
+          ❯
+        </button>
 
-      {/* Indicators */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-        {images.map((_, index) => (
-          <div
-            key={index}
-            className={`w-3 h-3 rounded-full ${
-              current === index ? "bg-pink-600" : "bg-white"
-            }`}
-          ></div>
-        ))}
+        {/* Indicators */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {images.map((_, index) => (
+            <div
+              key={index}
+              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition ${
+                current === index ? "bg-pink-600" : "bg-white"
+              }`}
+            ></div>
+          ))}
+        </div>
       </div>
-    </div>
     </div>
   );
 }

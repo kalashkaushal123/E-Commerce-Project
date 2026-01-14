@@ -1,5 +1,5 @@
-import React from 'react'
-import { ShoppingCart, Search, User, Moon, Heart } from "lucide-react";            // it's an icon library
+import React, { useState } from 'react'
+import { ShoppingCart, Search, User, Moon, Heart, Menu, X } from "lucide-react";            // it's an icon library
 import {Link, NavLink} from 'react-router-dom'
 import useTheme from '../Context/ThemeContext';
 import { useWishlist } from "../Context/WishlistContext";
@@ -14,158 +14,218 @@ function Header() {
 
     const {user, isLoggedIn, logout} = useLogin()
 
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [userMenu, setUserMenu] = useState(false);
+    const [mobileCategoryOpen, setMobileCategoryOpen] = useState(false);
+
+
   return (
     <header className="w-full bg-[#fce8ea] shadow-sm dark:bg-[#121212]">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
         {/* Logo */}
         <Link to="/">
-            <div className="text-2xl font-bold text-[#d6336c] tracking-wide">
-                Glow<span className="text-[#333] dark:text-[#f1f1f1]">Beauty</span>
-            </div>
+          <div className="text-2xl font-bold text-[#d6336c]">
+            Glow<span className="text-[#333] dark:text-[#f1f1f1]">Beauty</span>
+          </div>
         </Link>
 
-        {/* Nav Links */}
-        <ul className="hidden md:flex gap-8 text-[#444] font-medium">
+        {/* Desktop Nav */}
+        <ul className="hidden md:flex gap-8 font-medium text-[#444] dark:text-gray-300">
+          <NavLink to="/" className="hover:text-[#d6336c]">Home</NavLink>
 
-          <Link to='/'  className={({isActive}) => isActive ? "text-[#d6336c]" : "text-[#444] dark:text-gray-300"}>
-            <li className="hover:text-[#d6336c] cursor-pointer dark:text-gray-300 dark:hover:text-[#d6336c]">Home</li>
-          </Link>
-          <li className="relative group cursor-pointer">
-            {/* Parent */}
-            <span className="flex items-center gap-1 text-[#444] dark:text-gray-300 hover:text-[#d6336c]">
-              Categories
-            </span>
-
-            {/* Dropdown */}
-            <ul className="absolute left-0 mt-3 w-48 bg-white dark:bg-[#181818] shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+          <div className="relative group cursor-pointer">
+            <span className="hover:text-[#d6336c]">Categories</span>
+            <ul className="absolute left-0 mt-3 w-48 bg-white dark:bg-[#181818] shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
               {[
-                "bronzer",
-                "blush",
-                "lip_liner",
-                "foundation",
-                "eyeshadow",
-                "eyeliner",
-                "nail_polish",
-                "lipstick",
-                "mascara",
-              ].map((item) => (
-                <li key={item}>
-                  <NavLink
-                    to={`/categories/${item}`}
-                    className={({ isActive }) =>
-                      `block px-4 py-2 text-sm ${
-                        isActive
-                          ? "bg-pink-100 text-[#d6336c] dark:bg-[#2a2a2a]"
-                          : "text-[#444] dark:text-gray-300"
-                      } hover:bg-pink-100 hover:text-[#d6336c] dark:hover:bg-[#2a2a2a] dark:hover:text-[#d6336c] transition`
-                    }
-                  >
-                    {item.replace("_", " ").toUpperCase()}
-                  </NavLink>
-                </li>
+                "bronzer","blush","lip_liner","foundation","eyeshadow",
+                "eyeliner","nail_polish","lipstick","mascara"
+              ].map(item => (
+                <NavLink
+                  key={item}
+                  to={`/categories/${item}`}
+                  className="block px-4 py-2 text-sm hover:bg-pink-100 dark:hover:bg-[#2a2a2a]"
+                >
+                  {item.replace("_"," ").toUpperCase()}
+                </NavLink>
               ))}
             </ul>
-          </li>
+          </div>
 
-          <NavLink to='/about'  className={({isActive}) => isActive ? "text-[#d6336c]" : "text-[#444] dark:text-gray-300"}>
-            <li className="hover:text-[#d6336c] cursor-pointer">About</li>
-          </NavLink>
-          <NavLink to='/contact'  className={({isActive}) => isActive ? "text-[#d6336c]" : "text-[#444] dark:text-gray-300"}>
-            <li className="hover:text-[#d6336c] cursor-pointer">Contact</li>
-          </NavLink>
+          <NavLink to="/about" className="hover:text-[#d6336c]">About</NavLink>
+          <NavLink to="/contact" className="hover:text-[#d6336c]">Contact</NavLink>
         </ul>
 
         {/* Right Section */}
         <div className="flex items-center gap-4">
 
-          {/* Search */}
-         <div className="hidden sm:flex items-center bg-white dark:bg-[#1c1c1c] rounded-full px-3 py-1 shadow-sm">
-            <Search size={18} className="text-gray-400" />
-            <input
-                type="text"
-                placeholder="Search beauty products..."
-                className="outline-none border-none px-2 text-sm bg-transparent text-[#444] dark:text-[#f1f1f1]"
-            />
-         </div>
 
-          {/* Toggle */}
+        {/* Search */} 
+        <div className="hidden sm:flex items-center bg-white dark:bg-[#1c1c1c] rounded-full px-3 py-1 shadow-sm"> 
+            <Search size={18} className="text-gray-400" /> 
+            <input type="text" placeholder="Search beauty products..." className="outline-none border-none px-2 text-sm bg-transparent text-[#444] dark:text-[#f1f1f1]" /> 
+        </div>
+
+
+          {/* Theme Toggle */}
           <button
-            onClick={() => {
-              console.log("Moon clicked");
-              themeMode === "dark" ? lightTheme() : darkTheme();
-            }}
-            className="p-2 rounded-full hover:bg-pink-100 dark:hover:bg-[#2a2a2a] transition"
+            onClick={() => themeMode === "dark" ? lightTheme() : darkTheme()}
+            className="p-2 rounded-full hover:bg-pink-100 dark:hover:bg-[#2a2a2a]"
           >
-            <Moon
-              size={20}
-              className="text-[#444] dark:text-[#f1f1f1]"
-            />
+            <Moon size={20} />
           </button>
-
 
           {/* Wishlist */}
-          <button className="relative p-2 rounded-full hover:bg-pink-100 dark:hover:bg-[#2a2a2a] transition">
-            <Link to="/wishCart">
-              <Heart size={22} className="text-[#444] dark:text-gray-300 hover:text-[#d6336c]"/>
-              
-              {/* Wishlist count */}
-
-              {likedItems.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#d6336c] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                  {likedItems.length}
-                </span>
-              )}
-            </Link>
-            
-          </button>
+          <Link to="/wishCart" className="relative p-2">
+            <Heart size={22} />
+            {likedItems.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-[#d6336c] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                {likedItems.length}
+              </span>
+            )}
+          </Link>
 
           {/* Cart */}
-          <button className="relative p-2 rounded-full hover:bg-pink-100 dark:hover:bg-[#2a2a2a] transition">
-            <Link to="/cart">
-              <ShoppingCart size={22} className="text-[#444] dark:text-[#f1f1f1]" />
-              {cartItems.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#d6336c] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                  {cartItems.length}
+          <Link to="/cart" className="relative p-2">
+            <ShoppingCart size={22} />
+            {cartItems.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-[#d6336c] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                {cartItems.length}
+              </span>
+            )}
+          </Link>
+
+          {/* ================= USER SECTION ================= */}
+
+            {/* DESKTOP / MEDIUM+ → Direct Logout */}
+            {isLoggedIn && (
+            <div className="hidden md:flex items-center gap-3">
+                <span className="text-sm font-medium dark:text-white">
+                {user.name}
                 </span>
-                
-              )
-                
-              }
-              
-            </Link>
-          </button>
 
-          {/* Login */}
-          {/* <Link to="/login">
-            <button className="flex items-center gap-1 bg-[#d6336c] hover:bg-[#c2255c] text-white px-4 py-2 rounded-full text-sm transition">
-              <User size={16} />
-              Login
-            </button>
-          </Link> */}
-
-          {isLoggedIn ? (
-            <>
-              <span className='dark:text-white'>Hello, {user.name}</span>
-              <button 
-              onClick={logout}
-              className="flex items-center gap-1 bg-[#d6336c] hover:bg-[#c2255c] text-white px-4 py-2 rounded-full text-sm transition">
+                <button
+                onClick={logout}
+                className="bg-[#d6336c] text-white px-4 py-2 rounded-full text-sm hover:bg-pink-600 transition"
+                >
                 Logout
-              </button>
-            </>
-          ) : (
+                </button>
+            </div>
+            )}
+
+            {/* MOBILE → Avatar Dropdown */}
+            {isLoggedIn && (
+            <div className="relative md:hidden">
+                <button
+                onClick={() => setUserMenu(!userMenu)}
+                className="w-9 h-9 rounded-full bg-[#d6336c] text-white font-bold"
+                >
+                {user.name.charAt(0).toUpperCase()}
+                </button>
+
+                {userMenu && (
+                <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-[#181818] shadow-lg rounded-xl p-3 z-50">
+                    <p className="text-sm dark:text-white">{user.name}</p>
+                    <button
+                    onClick={logout}
+                    className="mt-2 w-full bg-[#d6336c] text-white text-sm py-1 rounded"
+                    >
+                    Logout
+                    </button>
+                </div>
+                )}
+            </div>
+            )}
+
+            {/* NOT LOGGED IN */}
+            {!isLoggedIn && (
             <Link to="/login">
-              <button 
-              className="flex items-center gap-1 bg-[#d6336c] hover:bg-[#c2255c] text-white px-4 py-2 rounded-full text-sm transition">
+                <button className="bg-[#d6336c] text-white px-4 py-2 rounded-full text-sm">
                 <User size={16} />
-                Login
-              </button>
+                </button>
             </Link>
-          )}
+            )}
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden p-2"
+          >
+            {menuOpen ? <X /> : <Menu />}
+          </button>
         </div>
       </nav>
-    </header>
-  )
+
+      {/* Mobile Menu */}
+
+      {menuOpen && (
+        <div className="md:hidden bg-white dark:bg-[#181818] px-6 py-4 shadow-lg">
+            
+            <ul className="flex flex-col gap-4 font-medium text-[#444] dark:text-gray-300">
+
+            <NavLink
+                to="/"
+                onClick={() => setMenuOpen(false)}
+                className="hover:text-[#d6336c]"
+            >
+                Home
+            </NavLink>
+
+            {/* Mobile Categories Toggle */}
+            <button
+                onClick={() => setMobileCategoryOpen(!mobileCategoryOpen)}
+                className="flex items-center justify-between hover:text-[#d6336c]"
+            >
+                <span>Categories</span>
+                <span className="text-sm">
+                {mobileCategoryOpen ? "-" : "+"}
+                </span>
+            </button>
+
+            {/* Categories List (ONLY when clicked) */}
+            {mobileCategoryOpen && (
+                <div className="flex flex-col gap-2 pl-4">
+                {[
+                    "bronzer","blush","lip_liner","foundation","eyeshadow",
+                    "eyeliner","nail_polish","lipstick","mascara"
+                ].map(item => (
+                    <NavLink
+                    key={item}
+                    to={`/categories/${item}`}
+                    onClick={() => {
+                        setMenuOpen(false);
+                        setMobileCategoryOpen(false);
+                    }}
+                    className="text-sm hover:text-[#d6336c]"
+                    >
+                    {item.replace("_"," ").toUpperCase()}
+                    </NavLink>
+                ))}
+                </div>
+            )}
+
+            <NavLink
+                to="/about"
+                onClick={() => setMenuOpen(false)}
+                className="hover:text-[#d6336c]"
+            >
+                About
+            </NavLink>
+
+            <NavLink
+                to="/contact"
+                onClick={() => setMenuOpen(false)}
+                className="hover:text-[#d6336c]"
+            >
+                Contact
+            </NavLink>
+
+            </ul>
+        </div>
+        )}
+          </header>
+
+      )
 }
 
 export default Header
