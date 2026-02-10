@@ -19,17 +19,44 @@ function Login() {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    e.preventDefault()
+    try {
+      const response = await fetch("http://localhost:8000/api/auth/login/", {
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json",
+        },
+        body: JSON.stringify({
+          username: formData.email,
+          password: formData.password,
+        }),
+      });
+    const data = await response.json();
 
-    const userData = {
-      name: formData.name,
-      email: formData.email
+    if(!response.ok){
+      alert(data.detail  || "Login failed")
+      return;
     }
 
-    login(userData);
-    navigate("/")
+    // backend should return : user + access token
+    login({ email: formData.email }, data.access);
+    navigate("/");
+
+    } catch (error) {
+      console.error("Login error: ", error);
+      
+    }
+    // e.preventDefault()
+
+    // const userData = {
+    //   name: formData.name,
+    //   email: formData.email
+    // }
+
+    // login(userData);
+    // navigate("/")
   }
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#fffbfb] dark:bg-black px-4">
@@ -50,7 +77,7 @@ function Login() {
 
 
           {/* Name */}
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Name
             </label>
@@ -62,7 +89,7 @@ function Login() {
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d6336c] dark:bg-black dark:border-gray-600 dark:text-white"
             />
-          </div>
+          </div> */}
           
           {/* Email */}
           <div>

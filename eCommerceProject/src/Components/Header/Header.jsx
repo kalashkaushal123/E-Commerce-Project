@@ -36,10 +36,9 @@ function Header() {
 
           <div className="relative group cursor-pointer">
             <span className="hover:text-[#d6336c]">Categories</span>
-            <ul className="absolute left-0 mt-3 w-48 bg-white dark:bg-[#181818] shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+            <ul className="absolute left-0 z-10 w-48 bg-white dark:bg-[#181818] shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
               {[
-                "bronzer","blush","lip_liner","foundation","eyeshadow",
-                "eyeliner","nail_polish","lipstick","mascara"
+                "foundation", "powder", "blush", "highlighter", "primer", "eyeshadow", "eyeliner", "mascara", "lipgloss", "lip liner", "lipstick", "brush", "Makeup Puff", ""
               ].map(item => (
                 <NavLink
                   key={item}
@@ -70,16 +69,16 @@ function Header() {
           {/* Theme Toggle */}
           <button
             onClick={() => themeMode === "dark" ? lightTheme() : darkTheme()}
-            className="p-2 rounded-full hover:bg-pink-100 dark:hover:bg-[#2a2a2a]"
+            className="p-2 rounded-full hover:bg-pink-100 dark:hover:bg-[#2a2a2a] dark:text-white"
           >
             <Moon size={20} />
           </button>
 
           {/* Wishlist */}
           <Link to="/wishCart" className="relative p-2">
-            <Heart size={22} />
+            <Heart size={22} className='dark:text-white' />
             {likedItems.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-[#d6336c] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+              <span className="absolute -top-1 -right-1 bg-[#d6336c] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full ">
                 {likedItems.length}
               </span>
             )}
@@ -87,7 +86,7 @@ function Header() {
 
           {/* Cart */}
           <Link to="/cart" className="relative p-2">
-            <ShoppingCart size={22} />
+            <ShoppingCart size={22} className='dark:text-white' />
             {cartItems.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-[#d6336c] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                 {cartItems.length}

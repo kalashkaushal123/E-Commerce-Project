@@ -5,30 +5,33 @@ export const LoginContext = createContext(null);
 export const LoginProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [token, setToken] = useState(null)
 
     // Restore from localStorage on reload
-    useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem("user"));
-        if (storedUser) {
-            setUser(storedUser);
-            setIsLoggedIn(true);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const storedUser = JSON.parse(localStorage.getItem("user"));
+    //     if (storedUser) {
+    //         setUser(storedUser);
+    //         setIsLoggedIn(true);
+    //     }
+    // }, []);
 
-    const login = (userData) => {
+    const login = (userData, accessToken) => {
         setUser(userData);
         setIsLoggedIn(true);
-        localStorage.setItem("user", JSON.stringify(userData));
+        setToken(accessToken);
+        // localStorage.setItem("user", JSON.stringify(userData));
     };
 
     const logout = () => {
         setUser(null);
         setIsLoggedIn(false);
-        localStorage.removeItem("user");
+        setToken(null)
+        // localStorage.removeItem("user");
     };
 
     return (
-        <LoginContext.Provider value={{ user, isLoggedIn, login, logout }}>
+        <LoginContext.Provider value={{ user, token, isLoggedIn, login, logout }}>
             {children}
         </LoginContext.Provider>
     );

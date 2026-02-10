@@ -84,7 +84,7 @@ function WishCart() {
         >
           {/* Image */}
           <img
-            src={item.image_link}
+            src={item.image}
             alt={item.name}
             className="h-40 w-full sm:w-52 lg:w-40 object-cover rounded-xl mx-auto lg:mx-0"
           />

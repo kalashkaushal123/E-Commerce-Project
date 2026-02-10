@@ -1,12 +1,31 @@
 import { Cross, ShoppingCart } from 'lucide-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../Context/CartContext'
 import { useWishlist } from '../Context/WishlistContext'
+import { useLogin } from '../Context/LoginContext'
 
 function Cart() {
   const { cartItems, setCartItems } = useCart()
   const { setLikedItems } = useWishlist()
+
+  const { token } = useLogin();
+
+  useEffect(()=>{
+    if(!token) return;
+
+    fetch("http://localhost:8000/api/cart/", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(res => res.json())
+    .then(data => {
+      setCartItems(data);
+    })
+    .catch(err => console.error(err))
+  }, [token])
+
 
   const removeItems = (id) => {
     setCartItems(prev => prev.filter(item => item.id !== id))
@@ -81,7 +100,7 @@ function Cart() {
           className="relative mb-6 flex flex-col lg:flex-row gap-6 bg-white dark:bg-[#181818] rounded-2xl shadow-xl p-4 lg:p-6"
         >
           <img
-            src={item.image_link}
+            src={item.image}
             alt={item.name}
             className="h-40 w-full sm:w-52 lg:w-40 object-cover rounded-xl mx-auto lg:mx-0"
           />

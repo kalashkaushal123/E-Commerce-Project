@@ -9,7 +9,7 @@ function Main() {
   const { likedItems, setLikedItems } = useWishlist();
 
   useEffect(() => {
-    fetch("https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline")
+    fetch("http://localhost:8000/api/products/")
       .then((response) => response.json())
       .then((result) => setData(result))
       .catch((error) => console.error(error));
@@ -37,7 +37,7 @@ function Main() {
             >
               <Link to={`/product/${item.id}`}>
                 <img
-                  src={item.image_link}
+                  src={item.image}
                   alt={item.name}
                   className="h-48 w-full object-cover rounded-xl"
                 />

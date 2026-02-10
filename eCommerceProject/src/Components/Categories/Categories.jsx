@@ -9,11 +9,13 @@ function Categories() {
   const { likedItems, setLikedItems } = useWishlist();
 
   useEffect(() => {
-    fetch("https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline")
+    fetch("http://localhost:8000/api/products/")
       .then(res => res.json())
       .then(result => {
+        console.log("API DATA:", result);
+        console.log("URL TYPE:", type);
         const filtered = result.filter(
-          item => item.product_type === type
+          item => item.product_type?.toLowerCase().trim() === type.toLowerCase().trim()
         );
         setData(filtered);
       });
@@ -27,7 +29,7 @@ function Categories() {
           className="w-72 bg-white dark:bg-[#181818] rounded-xl shadow p-4 relative"
         >
           <img
-            src={item.image_link}
+            src={item.image}
             className="h-48 w-full object-cover rounded-lg"
           />
 
