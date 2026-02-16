@@ -15,6 +15,7 @@ function Cart() {
     if(!token) return;
 
     fetch("http://localhost:8000/api/cart/", {
+      // method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
       },

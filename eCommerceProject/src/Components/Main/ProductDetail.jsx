@@ -1,87 +1,56 @@
+
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
 import { useWishlist } from "../Context/WishlistContext";
-import { useLogin } from "../Context/LoginContext";
+import { useNavigate } from "react-router-dom";
 
 function ProductDetail() {
-  const { id } = useParams();       // id aa rahi hai
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const { cartItems, setCartItems } = useCart()
-  const {likedItems, setLikedItems} = useWishlist()
-  const { isLoggedIn } = useLogin();
+  const {cartItems, setCartItems} = useCart();
+  const {likedItems, setLikedItems} = useWishlist();
   const navigate = useNavigate()
-  const location = useLocation()
 
   useEffect(() => {
-    fetch(`https://makeup-api.herokuapp.com/api/v1/products/${id}.json`)
+    fetch(`http://localhost:8000/api/products/${id}`)
       .then(res => res.json())
-      .then(data => {
-        setProduct(data);
-        setLoading(false);
-      })
-      .catch(err => console.log(err));
+      .then(data => setProduct(data));
   }, [id]);
 
-  if (loading) {
-    return (
-      <div className="h-screen flex justify-center items-center text-xl">
-        Loading...
-      </div>
-    );
-  }
-
   if (!product) {
-    return <p className="text-center mt-20">Product not found</p>;
+    return <p className="text-center mt-20">Loading...</p>;
   }
 
   const moveToCart = (item) => {
-    if(!isLoggedIn){
-      navigate("/login",{
-        state: {from: location.pathname}
-      })
-      return;
-    }
-    
-    setCartItems(prev => {
-          const exists = prev.find(p => p.id === item.id);
-          if (exists) return prev;
-          return [...prev, { ...item, quantity: 1 }];
+    setCartItems((prev) => {
+      const exists = prev.find((p) => p.id === item.id);
+
+      if(exists){
+        return prev.map((p) => p.id === item.id ? {...p, quantity: p.quantity + 1} : p)
+      }
+      return [...prev, {...item, quantity: 1}]
     });
-    setLikedItems(prev =>
-      prev.filter(wishItem => wishItem.id !== item.id)
-    )
+    navigate("/cart")
+  }
 
-    };
+  const moveToWishlist = (item) => {
+    setLikedItems((prev) => {
+      if (prev.find((p) => p.id === item.id)) return prev;
 
-    const moveToWishlist = (item) => {
-    if (!item?.id) return
-
-    // remove from cart
-    setCartItems(prev =>
-        prev.filter(cartItem => cartItem.id !== item.id)
-    )
-
-    // add to wishlist
-    setLikedItems(prev => {
-        if (prev.find(p => p.id === item.id)) return prev
-        return [...prev, {
-        ...item,
-        price: Number(item.price) || 0,
-        quantity: item.quantity || 1 
-      }]
+      return [...prev, {...item}]
     })
-    }
+    navigate("/wishlist")
+  }
 
-  return (
+    return (
     <div className="min-h-screen px-[8em] py-[4em] bg-[#fffbfb] dark:bg-black">
 
       <div className="flex gap-12 bg-white dark:bg-[#181818] p-10 rounded-2xl shadow-xl">
 
         {/* IMAGE */}
         <img
-          src={product.image_link}
+          src={product.image}
           alt={product.name}
           className="w-[22em] h-[22em] object-cover rounded-xl"
         />
@@ -90,6 +59,7 @@ function ProductDetail() {
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl font-bold text-[#d6336c]">
             {product.name}
+
           </h1>
 
           <p className="text-xl font-semibold dark:text-white">
@@ -151,3 +121,5 @@ function ProductDetail() {
 }
 
 export default ProductDetail;
+
+

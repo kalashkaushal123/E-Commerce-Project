@@ -7,7 +7,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.FloatField()
     description = models.TextField(blank=True)
-    image = models.CharField(max_length=500)
+    image = models.CharField(max_length=100)
 
     brand = models.CharField(max_length=100, default="Unknown")
     category = models.CharField(max_length=200, default="General")

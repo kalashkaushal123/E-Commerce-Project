@@ -21,7 +21,6 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 🔐 Password match check
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -36,12 +35,14 @@ function SignUp() {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            username: formData.email,
+            name: formData.name,
             email: formData.email,
             password: formData.password
           })
         }
       );
+
+      
 
       const data = await response.json();
 
@@ -169,3 +170,5 @@ function SignUp() {
 }
 
 export default SignUp
+
+

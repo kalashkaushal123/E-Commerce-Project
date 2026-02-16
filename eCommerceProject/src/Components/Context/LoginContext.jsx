@@ -8,26 +8,26 @@ export const LoginProvider = ({ children }) => {
     const [token, setToken] = useState(null)
 
     // Restore from localStorage on reload
-    // useEffect(() => {
-    //     const storedUser = JSON.parse(localStorage.getItem("user"));
-    //     if (storedUser) {
-    //         setUser(storedUser);
-    //         setIsLoggedIn(true);
-    //     }
-    // }, []);
+    useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (storedUser) {
+            setUser(storedUser);
+            setIsLoggedIn(true);
+        }
+    }, []);
 
     const login = (userData, accessToken) => {
         setUser(userData);
         setIsLoggedIn(true);
         setToken(accessToken);
-        // localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("user", JSON.stringify(userData));
     };
 
     const logout = () => {
         setUser(null);
         setIsLoggedIn(false);
         setToken(null)
-        // localStorage.removeItem("user");
+        localStorage.removeItem("user");
     };
 
     return (
