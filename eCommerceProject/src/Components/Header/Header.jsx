@@ -19,6 +19,9 @@ function Header() {
     const [mobileCategoryOpen, setMobileCategoryOpen] = useState(false);
 
 
+    console.log("User:", user);
+console.log("IsLoggedIn:", isLoggedIn);
+
   return (
     <header className="w-full bg-[#fce8ea] shadow-sm dark:bg-[#121212]">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
@@ -100,7 +103,7 @@ function Header() {
             {isLoggedIn && (
             <div className="hidden md:flex items-center gap-3">
                 <span className="text-sm bg-[#d6336c] text-white px-4 py-2 rounded-full font-medium dark:text-white">
-                {user.username}
+                {user.first_name}
                 </span>
 
                 <button
@@ -119,12 +122,12 @@ function Header() {
                 onClick={() => setUserMenu(!userMenu)}
                 className="w-9 h-9 rounded-full bg-[#d6336c] text-white font-bold"
                 >
-                {user?.name?.charAt(0).toUpperCase()}
+                {user?.first_name?.charAt(0).toUpperCase()}
                 </button>
 
                 {userMenu && (
                 <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-[#181818] shadow-lg rounded-xl p-3 z-50">
-                    <p className="text-sm dark:text-white">{user.name}</p>
+                    <p className="text-sm dark:text-white">{user.first_name}</p>
                     <button
                     onClick={logout}
                     className="mt-2 w-full bg-[#d6336c] text-white text-sm py-1 rounded"
