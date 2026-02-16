@@ -19,6 +19,7 @@ import Login from './Components/LogIn/Login.jsx'
 import ProductDetail from './Components/Main/ProductDetail.jsx'
 import { LoginProvider } from './Components/Context/LoginContext.jsx';
 import { ThemeProviderWrapper } from './Components/Context/ThemeContext.jsx';
+import SignUp from './Components/LogIn/SignUp.jsx';
 
 
 
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
       <Route path='wishCart' element={<WishCart />} />
       <Route path='cart' element={<Cart />} />
       <Route path='login' element={<Login />} />
+      <Route path='signup' element={<SignUp />} />
       <Route path='product/:id' element={<ProductDetail />} />
     </Route>
   )

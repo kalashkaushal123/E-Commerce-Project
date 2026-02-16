@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ShoppingCart, Search, User, Moon, Heart, Menu, X } from "lucide-react";            // it's an icon library
+import { ShoppingCart, Search, User, Moon, Heart, Menu, X, UserPlus  } from "lucide-react";            // it's an icon library
 import {Link, NavLink} from 'react-router-dom'
 import useTheme from '../Context/ThemeContext';
 import { useWishlist } from "../Context/WishlistContext";
@@ -99,8 +99,8 @@ function Header() {
             {/* DESKTOP / MEDIUM+ → Direct Logout */}
             {isLoggedIn && (
             <div className="hidden md:flex items-center gap-3">
-                <span className="text-sm font-medium dark:text-white">
-                {user.name}
+                <span className="text-sm bg-[#d6336c] text-white px-4 py-2 rounded-full font-medium dark:text-white">
+                {user.username}
                 </span>
 
                 <button
@@ -119,7 +119,7 @@ function Header() {
                 onClick={() => setUserMenu(!userMenu)}
                 className="w-9 h-9 rounded-full bg-[#d6336c] text-white font-bold"
                 >
-                {user.name.charAt(0).toUpperCase()}
+                {user?.name?.charAt(0).toUpperCase()}
                 </button>
 
                 {userMenu && (
@@ -138,11 +138,33 @@ function Header() {
 
             {/* NOT LOGGED IN */}
             {!isLoggedIn && (
-            <Link to="/login">
-                <button className="bg-[#d6336c] text-white px-4 py-2 rounded-full text-sm">
-                <User size={16} />
+            <>
+              <Link to="/login">
+                <button className="flex items-center gap-1 bg-[#d6336c] text-white px-4 py-2 rounded-full text-sm hover:bg-[#c2255c] transition">
+    
+                  <User size={16} />
+
+                  {/* Hide text on small screens */}
+                  <span className="hidden sm:inline">
+                    Login
+                  </span>
+
                 </button>
             </Link>
+
+            <Link to="/signup">
+                <button className="flex items-center gap-1 bg-[#d6336c] text-white px-4 py-2 rounded-full text-sm hover:bg-[#c2255c] transition">
+    
+                  <UserPlus size={16} />
+
+                  {/* Hide text on small screens */}
+                  <span className="hidden sm:inline">
+                    Sign Up
+                  </span>
+
+                </button>
+            </Link>
+            </>
             )}
 
           {/* Mobile Menu Button */}
