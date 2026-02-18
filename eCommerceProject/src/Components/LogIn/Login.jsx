@@ -41,8 +41,10 @@ function Login() {
     }
 
     // backend should return : user + access token
-    login({ email: formData.email }, data.access);
+    login(data.user, data.access);
     navigate("/");
+    // console.log(data);
+    
 
     } catch (error) {
       console.error("Login error: ", error);
@@ -57,7 +59,10 @@ function Login() {
 
     // login(userData);
     // navigate("/")
+    
   }
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#fffbfb] dark:bg-black px-4">
       <div className="w-full max-w-md bg-white dark:bg-[#181818] rounded-2xl shadow-xl p-8">

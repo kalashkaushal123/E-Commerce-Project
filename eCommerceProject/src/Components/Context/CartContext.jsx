@@ -16,7 +16,10 @@ export function CartProvider({ children }) {
       }
       
       const stored = localStorage.getItem(`Cart_${user.email}`);
-      setCartItems(stored ? JSON.parse(stored) : [])
+      const parsed = stored ? JSON.parse(stored) : [];
+
+      setCartItems(Array.isArray(parsed) ? parsed : []);
+
     }, [isLoggedIn, user])
 
     // save cat when it changes

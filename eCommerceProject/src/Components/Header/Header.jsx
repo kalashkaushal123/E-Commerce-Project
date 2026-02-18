@@ -19,8 +19,8 @@ function Header() {
     const [mobileCategoryOpen, setMobileCategoryOpen] = useState(false);
 
 
-    console.log("User:", user);
-console.log("IsLoggedIn:", isLoggedIn);
+    // console.log("User:", user);
+    // console.log("IsLoggedIn:", isLoggedIn);
 
   return (
     <header className="w-full bg-[#fce8ea] shadow-sm dark:bg-[#121212]">
@@ -41,7 +41,7 @@ console.log("IsLoggedIn:", isLoggedIn);
             <span className="hover:text-[#d6336c]">Categories</span>
             <ul className="absolute left-0 z-10 w-48 bg-white dark:bg-[#181818] shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
               {[
-                "foundation", "powder", "blush", "highlighter", "primer", "eyeshadow", "eyeliner", "mascara", "lipgloss", "lip liner", "lipstick", "brush", "Makeup Puff", ""
+                "foundation", "concealer", "powder", "blush", "highlighter", "primer", "eyeshadow", "eyeliner", "mascara", "lipgloss", "lip liner", "lipstick", "brush", "Makeup Puff", ""
               ].map(item => (
                 <NavLink
                   key={item}
@@ -102,7 +102,7 @@ console.log("IsLoggedIn:", isLoggedIn);
             {/* DESKTOP / MEDIUM+ → Direct Logout */}
             {isLoggedIn && (
             <div className="hidden md:flex items-center gap-3">
-                <span className="text-sm bg-[#d6336c] text-white px-4 py-2 rounded-full font-medium dark:text-white">
+                <span className="text-sm bg-[#d6336c] text-white px-4 py-2 rounded-full font-medium dark:text-white capitalize">
                 {user.first_name}
                 </span>
 

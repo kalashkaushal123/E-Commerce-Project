@@ -11,6 +11,11 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import MyTokenObtainPairSerializer
+
+
+
 @api_view(["GET"])
 def product_list(request):
     products = Product.objects.all()
@@ -118,3 +123,8 @@ def product_detail(request, pk):
         return Response(serializer.data)
     except Product.DoesNotExist:
         return Response({"error": "Product not found"}, status=404)
+    
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer

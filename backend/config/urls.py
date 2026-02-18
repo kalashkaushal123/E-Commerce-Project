@@ -17,9 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenRefreshView,
 )
+from api.views import MyTokenObtainPairView
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -29,7 +29,7 @@ urlpatterns = [
     path('api/', include("api.urls")),
 
     # AUTH API
-    path("api/auth/login/", TokenObtainPairView.as_view(), name="login"),
+    path("api/auth/login/", MyTokenObtainPairView.as_view(), name="login"),
     path("api/auth/refresh/", TokenRefreshView.as_view(), name="refresh"),
 ]
 
