@@ -9,6 +9,9 @@ import { useLogin } from '../Context/LoginContext'
   const { cartItems, setCartItems } = useCart() 
   const { setLikedItems } = useWishlist() 
   const { token } = useLogin(); 
+
+  console.log("Token:", token);
+
   
     useEffect(() => {
     if (!token) return;
@@ -23,22 +26,54 @@ import { useLogin } from '../Context/LoginContext'
         console.log("Cart API Response:", data);
 
         // IMPORTANT: adjust according to your backend response
-        if (Array.isArray(data)) {
-          setCartItems(data);
-        } else if (Array.isArray(data.cart)) {
-          setCartItems(data.cart);
+        // if (Array.isArray(data)) {
+        //   setCartItems(data);
+        // } else if (Array.isArray(data.cart)) {
+        //   setCartItems(data.cart);
+        // } else {
+        //   setCartItems([]);
+        // }
+
+
+        if (Array.isArray(data.cart_items)) {
+          setCartItems(data.cart_items);
         } else {
           setCartItems([]);
         }
+
+
       })
       .catch(err => console.error(err));
 
   }, [token]);
+
+
+
+  // REMOVE ITEMS
+
   
-  const removeItems = (id) => { 
-    setCartItems(prev => prev.filter(item => item.id !== id)) 
-  } 
+  // const removeItems = (id) => { 
+  //   setCartItems(prev => prev.filter(item => item.id !== id)) 
+  // } 
+
+  const removeItems = async (id) => {
+    try {
+      await fetch(`http://localhost:8000/api/delete-cart/${id}/`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setCartItems(prev => prev.filter(item => item.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
+  // MOVE TO WISHLIST 
+
+
   const moveToWishlist = (item) => { 
     setCartItems(prev => prev.filter(cartItem => cartItem.id !== item.id)) 
     setLikedItems(prev => { 
@@ -47,26 +82,90 @@ import { useLogin } from '../Context/LoginContext'
       return [...prev, item] 
     }) 
   } 
-  
-  const handleIncrement = (id) => { 
-    setCartItems(prev => 
-      prev.map(item => 
-        item.id === id 
-        ? { ...item, quantity: (item.quantity || 1) + 1 }
-        : item ) 
-      ) 
-    } 
 
-    const handleDecrement = (id) => { 
-      setCartItems(prev => 
-        prev.map(item => item.id === id && item.quantity > 1 
-          ? { ...item, quantity: item.quantity - 1 } 
-          : item ) 
-        ) 
-      } 
+
+  // INCREASE THE QUANTITY
+
+  
+  // const handleIncrement = (id) => { 
+  //   setCartItems(prev => 
+  //     prev.map(item => 
+  //       item.id === id 
+  //       ? { ...item, quantity: (item.quantity || 1) + 1 }
+  //       : item ) 
+  //     ) 
+  //   } 
+
+
+
+  const handleIncrement = async (id, currentQuantity) => {
+    try {
+      await fetch(`http://localhost:8000/api/update-cart/${id}/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          quantity: currentQuantity + 1,
+        }),
+      });
+
+      setCartItems(prev =>
+        prev.map(item =>
+          item.id === id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
+  // DECREASE QUANTITY
+
+    // const handleDecrement = (id) => { 
+    //   setCartItems(prev => 
+    //     prev.map(item => item.id === id && item.quantity > 1 
+    //       ? { ...item, quantity: item.quantity - 1 } 
+    //       : item ) 
+    //     ) 
+    //   } 
+
+
+  const handleDecrement = async (id, currentQuantity) => {
+    if (currentQuantity <= 1) return;
+
+    try {
+      await fetch(`http://localhost:8000/api/update-cart/${id}/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          quantity: currentQuantity - 1,
+        }),
+      });
+
+      setCartItems(prev =>
+        prev.map(item =>
+          item.id === id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
       
-    const totalPrice = () =>
-      cartItems.reduce((total, item) => total + item.price * item.quantity, 0) 
+  const totalPrice = () =>
+    cartItems.reduce((total, item) => total + item.price * item.quantity, 0) 
     
     
     if (cartItems.length === 0) { 
@@ -111,13 +210,13 @@ import { useLogin } from '../Context/LoginContext'
               </h3> 
               <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between mt-4 gap-4"> 
                 <p className="text-[#d6336c] font-bold text-2xl"> 
-                  ${(item.price * item.quantity).toFixed(2)} 
+                  ${item.price} 
                 </p> 
                 
                 <div className="flex"> 
                   <div 
                   className="w-12 h-9 border-2 border-gray-700 cursor-pointer text-[#d6336c] flex items-center justify-center text-xl font-bold" 
-                  onClick={() => handleIncrement(item.id)} >
+                  onClick={() => handleIncrement(item.id, item.quantity)} >
                    + 
                   </div> 
                   <div className="w-12 h-9 border-t-2 border-b-2 border-gray-700 text-[#d6336c] flex items-center justify-center font-bold"> 
@@ -126,7 +225,7 @@ import { useLogin } from '../Context/LoginContext'
                   
                   <div 
                   className="w-12 h-9 border-2 border-gray-700 cursor-pointer text-[#d6336c] flex items-center justify-center text-xl font-bold" 
-                  onClick={() => handleDecrement(item.id)} > 
+                  onClick={() => handleDecrement(item.id, item.quantity)} > 
                     - 
                   </div> 
                 </div> 

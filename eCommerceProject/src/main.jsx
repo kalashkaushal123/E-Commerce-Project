@@ -20,6 +20,8 @@ import ProductDetail from './Components/Main/ProductDetail.jsx'
 import { LoginProvider } from './Components/Context/LoginContext.jsx';
 import { ThemeProviderWrapper } from './Components/Context/ThemeContext.jsx';
 import SignUp from './Components/LogIn/SignUp.jsx';
+import ProfilePage from './Components/Header/ProfilePage.jsx';
+import Orders from './Components/Cart/Orders.jsx';
 
 
 
@@ -38,6 +40,8 @@ const router = createBrowserRouter(
       <Route path='login' element={<Login />} />
       <Route path='signup' element={<SignUp />} />
       <Route path='product/:id' element={<ProductDetail />} />
+      <Route path='profilepage' element={<ProfilePage /> } />
+      <Route path='orders' element={ <Orders /> } />
     </Route>
   )
 );

@@ -7,7 +7,11 @@ export const ThemeContext = createContext({
 });
 
 export function ThemeProviderWrapper({ children }) {
-    const [themeMode, setThemeMode] = useState('light');
+    // const [themeMode, setThemeMode] = useState('light');
+
+    const [themeMode, setThemeMode] = useState(() => {
+        return localStorage.getItem("theme") || "light";
+    });
 
     useEffect(() => {
         const root = document.documentElement; // <html>
@@ -17,6 +21,10 @@ export function ThemeProviderWrapper({ children }) {
         } else {
         root.classList.remove('dark');
         }
+
+        // Save to localStorage
+        localStorage.setItem("theme", themeMode);
+        
     }, [themeMode]);
 
     const darkTheme = () => setThemeMode('dark');

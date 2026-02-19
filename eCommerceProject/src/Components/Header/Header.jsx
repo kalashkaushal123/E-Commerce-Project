@@ -102,9 +102,11 @@ function Header() {
             {/* DESKTOP / MEDIUM+ → Direct Logout */}
             {isLoggedIn && (
             <div className="hidden md:flex items-center gap-3">
-                <span className="text-sm bg-[#d6336c] text-white px-4 py-2 rounded-full font-medium dark:text-white capitalize">
-                {user.first_name}
-                </span>
+                <Link to="/profilepage">
+                  <span className="text-sm bg-[#d6336c] text-white px-4 py-2 rounded-full font-medium dark:text-white capitalize">
+                    {user.first_name}
+                  </span>
+                </Link>
 
                 <button
                 onClick={logout}
@@ -118,12 +120,14 @@ function Header() {
             {/* MOBILE → Avatar Dropdown */}
             {isLoggedIn && (
             <div className="relative md:hidden">
-                <button
-                onClick={() => setUserMenu(!userMenu)}
-                className="w-9 h-9 rounded-full bg-[#d6336c] text-white font-bold"
-                >
-                {user?.first_name?.charAt(0).toUpperCase()}
-                </button>
+                <Link to="/profilepage">
+                  <button
+                  onClick={() => setUserMenu(!userMenu)}
+                  className="w-9 h-9 rounded-full bg-[#d6336c] text-white font-bold"
+                  >
+                  {user?.first_name?.charAt(0).toUpperCase()}
+                  </button>
+                </Link>
 
                 {userMenu && (
                 <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-[#181818] shadow-lg rounded-xl p-3 z-50">

@@ -8,9 +8,11 @@ urlpatterns = [
     path("auth/register/", register),
 
     #cart apis
-    path("cart/", cart_list),
-    path("cart/add/", add_to_cart),
-    path("cart/remove/<int:pk>/", remove_from_cart),
+    path('add-to-cart/', add_to_cart),
+    path('get-cart/', get_cart),
+    path('update-cart/<int:pk>/', update_cart),
+    path("delete-cart/<int:pk>/", delete_cart_item),
+
 
     # product
     path("products/<int:pk>/", product_detail),
