@@ -80,7 +80,7 @@ function Header() {
           {/* Wishlist */}
           <Link to="/wishCart" className="relative p-2">
             <Heart size={22} className='dark:text-white' />
-            {likedItems.length > 0 && (
+            {likedItems?.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-[#d6336c] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full ">
                 {likedItems.length}
               </span>
@@ -92,7 +92,7 @@ function Header() {
             <ShoppingCart size={22} className='dark:text-white' />
             {cartItems.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-[#d6336c] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                {cartItems.length}
+                {cartItems.length || 0}
               </span>
             )}
           </Link>

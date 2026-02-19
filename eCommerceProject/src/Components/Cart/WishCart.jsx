@@ -12,6 +12,8 @@ function WishCart() {
   const navigate = useNavigate()
   const location = useLocation()
 
+  const { token } = useLogin();
+
   const moveToCart = (item) => {
     if (!isLoggedIn) {
       navigate("/login", { state: { from: location.pathname } })

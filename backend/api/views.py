@@ -128,3 +128,4 @@ def product_detail(request, pk):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+

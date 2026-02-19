@@ -31,17 +31,17 @@ function Main() {
           gap-8
         ">
           {data.map((item) => (
+            
+            <Link to={`/product/${item.id}`}>
             <div
               key={item.id}
               className="bg-white dark:bg-[#181818] rounded-2xl shadow-xl p-4 relative h-[21em]"
             >
-              <Link to={`/product/${item.id}`}>
                 <img
                   src={item.image}
                   alt={item.name}
                   className="h-48 w-full object-cover rounded-xl"
                 />
-              </Link>
 
               <h3 className="mt-3 text-lg font-semibold text-gray-800 dark:text-white h-[3em] overflow-hidden">
                 {item.name}
@@ -78,6 +78,8 @@ function Main() {
                 />
               </span>
             </div>
+            
+            </Link>
           ))}
         </div>
 

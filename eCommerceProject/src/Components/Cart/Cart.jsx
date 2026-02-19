@@ -56,7 +56,7 @@ import { useLogin } from '../Context/LoginContext'
         : item ) 
       ) 
     } 
-    
+
     const handleDecrement = (id) => { 
       setCartItems(prev => 
         prev.map(item => item.id === id && item.quantity > 1 

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Heart } from "lucide-react";
 import { useWishlist } from "../Context/WishlistContext";
+import { Link } from "react-router-dom";
 
 function Categories() {
   const { type } = useParams();
@@ -24,6 +25,7 @@ function Categories() {
   return (
     <div className="flex flex-wrap gap-8 px-16 py-10 bg-[#fffbfb] dark:bg-black">
       {data.map(item => (
+        <Link to={`/product/${item.id}`}>
         <div
           key={item.id}
           className="w-72 bg-white dark:bg-[#181818] rounded-xl shadow p-4 relative"
@@ -54,6 +56,7 @@ function Categories() {
             }
           />
         </div>
+        </Link>
       ))}
     </div>
   );
