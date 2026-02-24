@@ -152,7 +152,7 @@ def add_to_cart(request):
     product_id = request.data.get("product_id")
     product = Product.objects.get(id = product_id)
 
-    cart_item, created = CartItem.objects,get_or_create(
+    cart_item, created = CartItem.objects.get_or_create(
         user = request.user,
         product = product
     )
@@ -212,3 +212,5 @@ def delete_cart_item(request, pk):
     cart_item.delete()
 
     return Response({"message" : "Item removed"})
+
+

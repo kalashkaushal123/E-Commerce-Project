@@ -34,4 +34,3 @@ class CartItem(models.Model):
         return f"{self.user.first_name} - {self.product.name}"
 
 
-    

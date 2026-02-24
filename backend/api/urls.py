@@ -16,4 +16,5 @@ urlpatterns = [
 
     # product
     path("products/<int:pk>/", product_detail),
+
 ]

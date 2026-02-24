@@ -272,9 +272,9 @@ import { useLogin } from '../Context/LoginContext'
     <span className="dark:text-white"> ${totalPrice().toFixed(2)} </span> 
   </div> 
   
-  <button className="w-full bg-[#d6336c] text-white rounded-lg py-4 mt-10 font-bold"> 
-    Place Your Order 
-  </button> 
+    <button className="w-full bg-[#d6336c] text-white rounded-lg py-4 mt-10 font-bold"> 
+      Place Your Order 
+    </button> 
 </div> 
 
 </div> 

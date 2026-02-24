@@ -28,7 +28,7 @@ function ProfilePage() {
         navigate("/");
     };
   return (
-    <div className="min-h-screen bg-pink-50 dark:bg-gray-900 p-6">
+    <div className="min-h-[60vh] bg-pink-50 dark:bg-gray-900 p-6">
       <div className="max-w-5xl mx-auto space-y-8">
 
         {/* Profile Header */}
@@ -71,23 +71,6 @@ function ProfilePage() {
               </p>
             </div>
           </div>
-        </div>
-
-        {/* Orders Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
-              Check My Orders
-            </h3>
-            <Link to="/orders"> 
-                <span className="bg-pink-600 text-white px-6 py-1 rounded-lg text-lg font-semibold cursor-pointer">
-                <button>
-                    Orders History
-                </button>
-                </span>
-            </Link>
-          </div>
-
         </div>
 
       </div>
