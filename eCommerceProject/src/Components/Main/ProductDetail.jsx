@@ -13,7 +13,7 @@ function ProductDetail() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/products/${id}`)
+    fetch(`https://e-commerce-project-7mxb.onrender.com/api/products/${id}`)
       .then(res => res.json())
       .then(data => setProduct(data));
   }, [id]);

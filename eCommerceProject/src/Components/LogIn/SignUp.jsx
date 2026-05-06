@@ -28,7 +28,7 @@ function SignUp() {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/auth/register/",
+        "https://e-commerce-project-7mxb.onrender.com/api/auth/register/",
         {
           method: "POST",
           headers: {

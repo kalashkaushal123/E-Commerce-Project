@@ -16,7 +16,7 @@ import { useLogin } from '../Context/LoginContext'
     useEffect(() => {
     if (!token) return;
 
-    fetch("http://localhost:8000/api/cart/", {
+    fetch("https://e-commerce-project-7mxb.onrender.com/api/cart/", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -58,7 +58,7 @@ import { useLogin } from '../Context/LoginContext'
 
   const removeItems = async (id) => {
     try {
-      await fetch(`http://localhost:8000/api/delete-cart/${id}/`, {
+      await fetch(`https://e-commerce-project-7mxb.onrender.com/api/delete-cart/${id}/`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -100,7 +100,7 @@ import { useLogin } from '../Context/LoginContext'
 
   const handleIncrement = async (id, currentQuantity) => {
     try {
-      await fetch(`http://localhost:8000/api/update-cart/${id}/`, {
+      await fetch(`https://e-commerce-project-7mxb.onrender.com/api/update-cart/${id}/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -140,7 +140,7 @@ import { useLogin } from '../Context/LoginContext'
     if (currentQuantity <= 1) return;
 
     try {
-      await fetch(`http://localhost:8000/api/update-cart/${id}/`, {
+      await fetch(`https://e-commerce-project-7mxb.onrender.com/api/update-cart/${id}/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

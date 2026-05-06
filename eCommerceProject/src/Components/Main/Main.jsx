@@ -9,7 +9,7 @@ function Main() {
   const { likedItems, setLikedItems } = useWishlist();
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/products/")
+    fetch("https://e-commerce-project-7mxb.onrender.com/api/products/")
       .then((response) => response.json())
       .then((result) => setData(result))
       .catch((error) => console.error(error));
