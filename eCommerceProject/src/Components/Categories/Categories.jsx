@@ -10,7 +10,7 @@ function Categories() {
   const { likedItems, setLikedItems } = useWishlist();
 
   useEffect(() => {
-    fetch("https://e-commerce-project-7mxb.onrender.com/api/products/")
+    fetch("http://127.0.0.1:8000/api/products/")
       .then(res => res.json())
       .then(result => {
         console.log("API DATA:", result);
