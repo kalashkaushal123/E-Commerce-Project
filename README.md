@@ -31,9 +31,9 @@
 
 <p align="center">
 
-<img src="images/Screenshot1.png" width="450" height="200">
+<img src="images/Screenshot1.png" width="420" height="200">
 
-<img src="images/Screenshot2.png" width="450" height="200">
+<img src="images/Screenshot2.png" width="420" height="200">
 
 </p>
 
