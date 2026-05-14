@@ -56,6 +56,7 @@ function WishCart() {
   if (likedItems.length === 0) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 dark:bg-black">
+        <h1 className='text-4xl font-bold pt-6 pb-10 text-[#d6336c] dark:text-white'>WishList</h1>
         <div className="w-24 h-24 flex items-center justify-center rounded-full bg-pink-100 dark:bg-[#2a1c22] mb-6">
           <Heart size={40} className="text-[#d6336c]" fill="#d6336c" />
         </div>
@@ -79,6 +80,7 @@ function WishCart() {
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-16 py-10 bg-[#fffbfb] dark:bg-black pb-[8em]">
+      <h1 className='text-4xl font-bold pt-6 pb-10 text-[#d6336c] dark:text-white'>WishList</h1>
       {likedItems.map(item => (
         <div
           key={item.id}
