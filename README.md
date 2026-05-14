@@ -30,11 +30,18 @@
 ## Screenshorts
 
 <p align="center">
+    <img src="images/Screenshot1.png" width="400" height="200">
+    <img src="images/Screenshot2.png" width="400" height="200">
+</p>
 
-<img src="images/Screenshot1.png" width="400" height="200">
+<p align="center">
+    <img src="images/Screenshot3.png" width="400" height="200">
+    <img src="images/Screenshot4.png" width="400" height="200">
+</p>
 
-<img src="images/Screenshot2.png" width="400" height="200">
-
+<p align="center">
+    <img src="images/Screenshot5.png" width="400" height="200">
+    <img src="images/Screenshot6.png" width="400" height="200">
 </p>
 
 
