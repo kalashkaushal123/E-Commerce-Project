@@ -5,5 +5,7 @@
 # About the Project 
 
 <div>
-    <div className="font-bold bg-blue-700 text-white px-4 py-2 rounded-xl"> React </div>
+    <div className="font-bold bg-blue-700 text-white px-4 py-2 rounded-xl">
+        React
+    </div>
 </div>
