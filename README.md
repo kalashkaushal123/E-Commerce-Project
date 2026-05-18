@@ -11,12 +11,19 @@
 <p> This project helped me strengthen my full-stack development skills by combining frontend design, backend integration, authentication systems, and scalable project architecture. </p>
 
 
-## 🚀 Key Features
+## 🚀 ✨ Key Features
 
-- 🌙 Modern Dark Mode UI
-- 🔐 Secure Authentication System
-- 🛒 Dynamic Shopping Cart
-
+- 🔐 Authentication System
+- 🛒 Cart System Functionality
+- ❤️ Wishlist
+- 🌙 Dark Mode Support
+- 📱 Fully Responsive Design
+- ➕ Add & Remove Product Quantity
+- 📦 Product Listing & Detail Pages
+- ⚡ Dynamic Data Handling Using APIs
+- 📞 Contact Page
+- ℹ️ About Page
+- 💻 Clean & Scalable Project Structure
 
 ## Tech Stack
 
@@ -44,14 +51,6 @@
     <img src="images/Screenshot6.png" width="400" height="200">
 </p>
 
-
-
-## ✨ Features
-
-- 🔐 Authentication
-- 🛒 Cart System
-- ❤️ Wishlist
-- 🌙 Dark 
 
 
 
