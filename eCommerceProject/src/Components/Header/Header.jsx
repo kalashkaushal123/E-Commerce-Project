@@ -24,7 +24,7 @@ function Header() {
 
   return (
     <header className="w-full bg-[#fce8ea] shadow-sm dark:bg-[#121212]">
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-6 py-4">
 
         {/* Logo */}
         <Link to="/">
@@ -34,7 +34,7 @@ function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex gap-8 font-medium text-[#444] dark:text-gray-300">
+        <ul className="hidden md:flex gap-8 max-[1024px]:gap-3 font-medium text-[#444] dark:text-gray-300">
           <NavLink to="/" className="hover:text-[#d6336c]">Home</NavLink>
 
           <div className="relative group cursor-pointer">
@@ -59,14 +59,14 @@ function Header() {
         </ul>
 
         {/* Right Section */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center xl:gap-4 lg:gap-2 md:gap-1">
 
 
-        {/* Search */} 
-        <div className="hidden sm:flex items-center bg-white dark:bg-[#1c1c1c] rounded-full px-3 py-1 shadow-sm"> 
-            <Search size={18} className="text-gray-400" /> 
-            <input type="text" placeholder="Search beauty products..." className="outline-none border-none px-2 text-sm bg-transparent text-[#444] dark:text-[#f1f1f1]" /> 
-        </div>
+          {/* Search */} 
+          <div className="hidden lg:flex items-center bg-white dark:bg-[#1c1c1c] rounded-full px-3 py-1 shadow-sm"> 
+              <Search size={18} className="text-gray-400 shrink-0" /> 
+              <input type="text" placeholder="Search beauty products..." className="outline-none border-none px-2 text-sm bg-transparent text-[#444] dark:text-[#f1f1f1] w-full" /> 
+          </div>
 
 
           {/* Theme Toggle */}
@@ -147,7 +147,7 @@ function Header() {
             {!isLoggedIn && (
             <>
               <Link to="/login">
-                <button className="flex items-center gap-1 bg-[#d6336c] text-white px-4 py-2 rounded-full text-sm hover:bg-[#c2255c] transition">
+                <button className="flex items-center gap-1 bg-[#d6336c] text-white px-3 md:px-4 py-2 rounded-full text-sm hover:bg-[#c2255c] transition">
     
                   <User size={16} />
 
